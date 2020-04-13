@@ -7,7 +7,7 @@ screen_info =  pygame.display.Info()
 size = (width, height) = (int(screen_info.current_h), int(screen_info.current_h))
 screen = pygame.display.set_mode(size)
 clock = pygame.time.Clock()
-color = (43, 56, 64)
+color = (5, 29, 33)
 screen.fill(color)
 
 
