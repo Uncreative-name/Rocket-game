@@ -1,4 +1,6 @@
 import pygame
+from Ship import ship
+
 
 from pygame.locals import *
 
@@ -11,21 +13,39 @@ clock = pygame.time.Clock()
 color = (0, 0, 0)
 screen.fill(color)
 
-class ship:
-  def __init__(self, pos):
-    super().__init__()
-    self.image = pygame.image.load("spaceRockets_003.png")
-    self.rect = self.image.get_rect()
-    self.image = pygame.transform.smoothscale(self.image, (int(0.4 * self.rect.width), int(0.4 * self.rect.height)))
-    self.rect = self.image.get_rect()
-    self.rect.center = pos
-
-start = (30,300)
+start = (80,300)
 player = ship(start)
 
+asteroids = pygame.sprite.Group()
+
+level = 1
+
 def main():
+  
   while True:
-    clock.tick(60)
+    clock.tick(30)
+
+    for event in pygame.event.get():
+      if event.type == pygame.KEYDOWN:
+        
+        if event.key == pygame.K_RIGHT:
+          player.speed[0] += 1
+        
+        if event.key == pygame.K_LEFT:
+          player.speed[0] -= 1
+        
+        if event.key == pygame.K_UP:
+          player.speed[1] -= 1
+        
+        if event.key == pygame.K_DOWN:
+          player.speed[1] += 1
+        
+        if event.key == pygame.K_SPACE:
+          player.speed[0] += 6
+  
+
+
+    player.update()
     screen.fill(color)
     
     screen.blit(player.image, player.rect)
